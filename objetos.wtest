@@ -2,6 +2,22 @@ import objetos.*
 
 describe "tests de futbolito" {
 
+    test "lionel puede cambiar camiseta en el borde izquierdo" {
+        lionel.position(game.at(0, 5))
+        assert.equals(lionel.position().x(), 0)
+        lionel.cambiarCamiseta()
+        assert.equals(lionel.image(), "lionel-suplente.png")
+    }
+
+
+    test "lionel no puede cambiar camiseta en el borde derecho" {
+        lionel.position(game.at(9, 5))
+        assert.equals(lionel.position().x(), 9)
+        assert.equals(lionel.image(), "lionel-titular.png")
+        lionel.cambiarCamiseta()
+        assert.equals(lionel.image(), "lionel-titular.png")
+    }
+
     test "buscar pelota" {
         assert.notEquals(pelota.position(), lionel.position())
         lionel.buscar()
