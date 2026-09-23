@@ -26,6 +26,18 @@ object lionel {
 	method buscar() {
 		position = objetivo.position()
 	}
+
+	method patear() {
+		self.validarPatear()
+		objetivo.desplazarse()
+	}
+
+	method validarPatear() {
+		if (position != objetivo.position()) {
+			self.error("La pelota no esta al alcance para patear")
+		}
+	}
+
 	
 	method validarHacerTaquito(objetiv) {
 		if ( not ( objetivo.position() == position ) ){
@@ -46,4 +58,11 @@ object pelota {
 	method inicio() {
 		position = game.at(0,5)
 	}
+	
+	method desplazarse() {
+		const nuevaCoordenadaX = (position.x() + 3).min(game.width() - 1)
+		position = game.at(nuevaCoordenadaX, position.y())
+
+	}	
+
 }
