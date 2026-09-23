@@ -2,13 +2,9 @@
 import wollok.game.*
 
 object lionel {
-	
 	var property position = game.at(3,5)
-
 	var camisetaTitular = true
-
 	const objetivo = pelota
-
 
 	method image() {
 		if (camisetaTitular) {
@@ -18,20 +14,12 @@ object lionel {
 		}
 	}
 
-
-
 	method retroceder() {
 		position = game.at(0.max(position.x() - 1), position.y()) 
 	}
 	
-
 	method avanzar() {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
-	}
-
-	method hacerTaquitoCon(objetiv) {
-		self.validarHacerTaquito(objetiv)
-		objetiv.recibirTaquitoDe(self)
 	}
 
 	method buscar() {
@@ -49,6 +37,10 @@ object lionel {
 		}
 	}
 
+	method hacerTaquito() {
+		self.validarHacerTaquito()
+		objetivo.recibirTaquitoDe(self)
+	}
 
 	method cambiarCamiseta() {
 		if (position.x() == 0) {
@@ -56,16 +48,12 @@ object lionel {
 		}
 	}
 
-	method validarHacerTaquito(objetiv) {
-		if ( not ( objetivo.position() == position ) ){
+	method validarHacerTaquito() {
+		if ( objetivo.position() != position ){
 			self.error('No se puede hacer taquito, acercate a la pelota')
-
 		}
 	}
 }
-
-
-
 
 object pelota {
 	const property image="pelota.png"
@@ -82,7 +70,5 @@ object pelota {
 	method desplazarse() {
 		const nuevaCoordenadaX = (position.x() + 3).min(game.width() - 1)
 		position = game.at(nuevaCoordenadaX, position.y())
-
 	}	
-
 }
