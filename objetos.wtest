@@ -1,0 +1,56 @@
+import objetos.*
+
+describe "tests de futbolito" {
+    test "buscar pelota" {
+        assert.notEquals(pelota.position(), lionel.position())
+        lionel.buscar()
+        assert.equals(pelota.position(), lionel.position())
+    }
+
+    test "inicio" {
+        const origen = game.at(0,5)
+        assert.notEquals(origen, pelota.position())
+        pelota.inicio()
+        assert.equals(origen, pelota.position())
+    }
+
+    test "lionel patea la pelota y esta se mueve 3 posiciones a la derecha" {
+        assert.throwsException({lionel.patear()})
+        pelota.inicio()
+        lionel.buscar()
+        assert.equals(lionel.position(), pelota.position())
+        lionel.patear()
+        assert.equals(pelota.position(), game.at(3,5))
+        lionel.position(game.at(14,5))
+        pelota.position(game.at(14,5))
+        lionel.patear()
+    }
+
+    test "Lionel hace un taquito" {
+        lionel.position( game.at(4,5) )
+        pelota.position( game.at(4,5) )
+        lionel.hacerTaquito()
+        assert.equals( 2, pelota.position().x() )
+    }
+
+    test "Lionel intenta hacer taquito pero está lejos de la pelota" {
+        lionel.position( game.at(7,5) )
+        pelota.position( game.at(3,5) )
+        assert.throwsException( {lionel.hacerTaquito()} )
+    }
+
+    test "lionel puede cambiar camiseta en el borde izquierdo" {
+        lionel.position(game.at(0, 5))
+        assert.equals(lionel.position().x(), 0)
+        lionel.cambiarCamiseta()
+        assert.equals(lionel.image(), "lionel-suplente.png")
+    }
+
+    test "lionel no puede cambiar camiseta en el borde derecho" {
+        lionel.position(game.at(9, 5))
+        assert.equals(lionel.position().x(), 9)
+        assert.equals(lionel.image(), "lionel-titular.png")
+        lionel.cambiarCamiseta()
+        assert.equals(lionel.image(), "lionel-titular.png")
+    }
+}
