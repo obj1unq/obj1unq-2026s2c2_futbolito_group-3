@@ -1,0 +1,13 @@
+import objetos.*
+describe "Messi patea la pelota" {
+    test "y esta se mueve 3 a la derecha" {
+        pelota.inicio()
+        lionel.buscar()
+
+        assert.equals(lionel.position(), pelota.position())
+
+        lionel.patear()
+
+        assert.equals(pelota.position(), game.at(3,5))
+    }
+}
