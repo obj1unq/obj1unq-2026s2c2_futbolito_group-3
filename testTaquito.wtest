@@ -1,0 +1,17 @@
+import objetos.*
+
+describe "Taquito" {
+  test "Lionel hace un taquito" {
+    lionel.position( game.at(4,5) )
+    pelota.position( game.at(4,5) )
+    lionel.hacerTaquitoCon(pelota)
+    assert.equals( 2, pelota.position().x() )
+  }
+
+  test "Lionel intenta hacer taquito pero está lejos de la pelota" {
+    lionel.position( game.at(7,5) )
+    pelota.position( game.at(3,5) )
+    
+    assert.throwsException( {lionel.hacerTaquitoCon(pelota)} )
+  }
+}
