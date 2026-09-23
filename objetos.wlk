@@ -51,11 +51,18 @@ object lionel {
 
 
 	method cambiarCamiseta() {
-		if (position.x() == 0) {
-			 camisetaTitular = not camisetaTitular
+		self.validarCambiarCamiseta()
+		camisetaTitular = not camisetaTitular
+	}
+
+
+	method validarCambiarCamiseta() {
+		if (position.x() != 0) {
+			self.error("No se puede cambiar camiseta, acercate al borde izquierdo")
 		}
 	}
 
+	
 	method validarHacerTaquito(objetiv) {
 		if ( not ( objetivo.position() == position ) ){
 			self.error('No se puede hacer taquito, acercate a la pelota')
